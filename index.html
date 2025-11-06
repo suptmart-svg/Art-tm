@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team ART | ورود و خدمات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --hue: 200; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      font-family: 'Vazirmatn', 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at center, #0f2027, #203a43, #2c5364);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      transition: background 1s ease;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .ticker {
+      position: fixed;
+      width: 100%;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      z-index: 10;
+      direction: rtl;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .ticker-top { top: 0; }
+    .ticker-bottom { bottom: 0; }
+    .ticker-text {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: clamp(14px, 2vw, 18px);
+      line-height: 44px;
+      font-weight: 600;
+      padding-right: 100%;
+      animation: scroll 14s linear infinite, wave 5s ease-in-out infinite;
+      background: linear-gradient(270deg, #ffffff, #00ffff, #ffffff);
+      background-size: 400% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes wave {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    h1 {
+      font-size: clamp(80px, 14vw, 140px);
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 80px;
+      background: linear-gradient(270deg, #00ffff, #ffffff, #0077ff, #00ccff, #999999);
+      background-size: 600% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: wave 3s ease-in-out infinite;
+    }
+    .welcome {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 700;
+      letter-spacing: 4px;
+      opacity: 0;
+      transition: opacity 2s ease;
+      background: linear-gradient(90deg, #9900cc, #ff3300, #ff9900, #ffcc00);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: wave 4s ease-in-out infinite;
+    }
+    .welcome.show { opacity: 1; }
+    .status {
+      position: fixed;
+      bottom: 48px;
+      font-size: clamp(14px, 2vw, 18px);
+      opacity: 0.7;
+      text-align: center;
+      width: 100%;
+    }
+    #telegramPage {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .item {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1rem;
+      color: inherit;
+      text-decoration: none;
+      width: 90%;
+      max-width: 400px;
+      margin: 0.5rem auto;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .card:hover, .item:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.2);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin: 2rem 0;
+    }
+    .year-fade {
+      animation: fadeYear 4s infinite;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    @keyframes fadeYear {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snow"></canvas>
+
+  <div class="ticker ticker-top">
+    <div class="ticker-text">🎂 تولد مالک تیم آرت مبارک باد — 🎉 سال جدید میلادی (۲۰۲۶) مبارک باد —</div>
+  </div>
+
+  <h1>ART</h1>
+  <div class="welcome" id="welcome">WELCOME</div>
+  <div class="status">Connecting to server...</div>
+
+  <div class="ticker ticker-bottom">
+    <div class="ticker-text">🎂 Happy Birthday Owner Team ART — 🎉 Happy New Year (2026) —</div>
+  </div>
+
+  <!-- صفحه خدمات -->
+  <section id="telegramPage">
+    <a class="card" href="https://t.me/AbolWin" target="_blank">👑 Owner Team Art<br>@AbolWin</a>
+    <a class="card" href="https://t.me/iDofss" target="_blank">🛠️ Support Team<br>@iDofss - @ArtOnSupp</a>
+    <a class="card" href="https://t.me/Ch_ArtSupport" target="_blank">📢 Channel<br>@Ch_ArtSupport</a>
+    <a class="card" href="https://t.me/G_ArtSupport" target="_blank">👥 Group<br>@G_ArtSupport</a>
+    <div class="item">💎 Premium Telegram</div>
+    <div class="item">🎁 Gifts Telegram</div>
+    <div class="item">📱 Phone number (Account)</div>
+    <div class="item">🤖 Bot Team Art</div>
+    <footer>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" width="24">
+      </div>
+      <div>تمامی حقوق نزد مالک تیم محفوظ است<br><em>All rights reserved by the owner of Team Art</em></div>
+      <div class="year-fade">2018 - 2026</div>
+    </footer>
+  </section>
+
+  <script>
+    // افکت برف
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    const snowflakes = Array.from({ length: 100 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 2 + 1,
+      dy: Math.random() * 1 + 0.5
+    }));
